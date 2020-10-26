@@ -21,7 +21,7 @@ const User = mongoose.model(
   new Schema({
     username: {type: String, required: true},
     password: {type: String, required: true},
-    todoList: {type: Array,  required: false}
+    todos: {type: Array, required: false}
   })
 )
 
@@ -32,6 +32,24 @@ const upload = multer()
 // For parsing multipart/form-data
 app.use(upload.array())
 app.use(express.static('public'))
+
+
+
+
+
+
+
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+}
+
+
+
+
 
 
 // Verify login details against database of users
@@ -108,35 +126,37 @@ app.post(
 )
 
 app.get('/logout',
-  function(req, res) {
-    req.logout()
-    res.redirect('/login')
+  function(req, res, next) {
+    try {
+      let user = req.user.username
+      req.logout()
+      console.log(user + ' logged out.')
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
 )
+
+
 
 
 
 app.get(
-  '/api/user',
+  '/api/user-todos', loggedIn,
   function(req, res, next) {
-    res.send(
-      {
-      username: 'Tim',
-      todos: [
-        {
-          id: 1,
-          task: "Milk the cow",
-          completed: true
-        },
-        {
-          id: 2,
-          task: "Put up tent",
-          completed: false
-        }
-      ]
+    User.findOne({ username: req.user.username })
+    .then(user => {
+      res.send(user.todos)
     })
-  }
-)
+    .catch(err => res.status(404).json({ success: false }))
+})
+
+
+
+
+
+
 
 
 

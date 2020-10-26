@@ -8,23 +8,24 @@ import "./scss/Todos.scss"
 const App = () => {
   const [ todos, modifyTodos ] = useState([])
   const defaultTodos = [{
-    id: 1,
+    id: 0,
     task: "Write first todo",
     completed: false
   }]
 
+  // Load user's todos when page loads for first time
   useEffect(() => {
-    fetch('/api/user')
+    fetch('/api/user-todos')
       .then(res => res.json() )
-      .then(data => {
-        if (data.todos) {
-          modifyTodos(data.todos)
-        }
-        else {
-          modifyTodos(defaultTodos)
-        }
+      .then(todos => {
+        modifyTodos(todos)
       })
-  }, [defaultTodos])
+  }, [])
+
+  useEffect(() => {
+
+
+  }, [todos])
 
 
   // Add new todo to list
