@@ -1,0 +1,30 @@
+// Responsive layout breakpoints
+$breakpoint-pc: 1200px;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap');
+
+// Blacks and whites
+$black:       hsla(0, 0%, 0%, 1);
+$near-black:  hsla(0, 0%, 20%, 1);
+
+$grey1:       hsla(0, 0%, 40%, 1);
+$grey2:       hsla(0, 0%, 60%, 1);
+$grey3:       hsla(0, 0%, 80%, 1);
+$grey4:       hsla(0, 0%, 90%, 1);
+$grey5:       hsla(0, 0%, 95%, 1);
+
+$near-white:  hsla(0, 0%, 99%, 1);
+$white:       hsla(0, 0%, 100%, 1);
+
+// Colors
+$primary:       hsla(190, 30%, 40%, 1);
+$primary-dark:  hsla(190, 30%, 20%, 1);
+$primary-light: hsla(190, 30%, 60%, 1);
+
+$secondary: hsla(190, 30%, 98%, 1);
+
+
+
+
+//Misc
