@@ -39,6 +39,7 @@ app.use(express.static('public'))
 
 
 
+// Verify is user is logged in
 function loggedIn(req, res, next) {
   if (req.user) {
     next()
@@ -88,7 +89,7 @@ passport.deserializeUser(function(id, done) {
 app.use(session({secret: process.env.COOKIE_SECRET, resave: false, saveUninitialized: true}))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user
   next()
@@ -127,14 +128,8 @@ app.post(
 
 app.get('/logout',
   function(req, res, next) {
-    try {
-      let user = req.user.username
-      req.logout()
-      console.log(user + ' logged out.')
-    }
-    catch (err) {
-      console.log(err)
-    }
+    req.session.destroy()
+    next()
   }
 )
 
@@ -155,7 +150,20 @@ app.get(
 
 
 
+app.put(
+  '/api/user-todos', loggedIn,
+  async function(req, res, next) {
 
+  const body = req.body.todos
+  console.log(body)
+  const username = req.user.username
+
+  const doc = await User.findOne({username: username})
+  doc.todos = body
+  doc.save()
+
+  res.json('All good')
+})
 
 
 

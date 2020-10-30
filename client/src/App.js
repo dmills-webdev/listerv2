@@ -1,5 +1,5 @@
-import React from "react"
-import { BrowserRouter, NavLink, Route } from 'react-router-dom'
+import React, { useState } from 'react'
+import { BrowserRouter, NavLink, Route, useHistory }from 'react-router-dom'
 
 import Signup from './Signup'
 import Login from './Login'
@@ -7,12 +7,15 @@ import Todos from './Todos'
 
 import "./scss/App.scss"
 
-const App = () => {
+function App() {
+  let history = useHistory()
 
   // Log current user out
   function logout() {
-    console.log('Trying to log out')
     fetch('/logout')
+    .then(
+      history.push('/login')
+    )
   }
 
   return(

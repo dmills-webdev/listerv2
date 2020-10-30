@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from "react-router-dom"
+import { useHistory } from 'react-router-dom'
 
 function Signup() {
   const history = useHistory()
@@ -13,7 +13,7 @@ function Signup() {
      method: 'POST',
      body: data,
     })
-    history.push("/")
+    history.push('/')
 }
 
   return(

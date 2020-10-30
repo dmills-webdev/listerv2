@@ -6,32 +6,45 @@ import NewTodoForm from "./components/NewTodoForm"
 import "./scss/Todos.scss"
 
 const App = () => {
-  const [ todos, modifyTodos ] = useState([])
   const defaultTodos = [{
     id: 0,
     task: "Write first todo",
     completed: false
   }]
+  const [ todos, modifyTodos ] = useState(defaultTodos)
 
-  // Load user's todos when page loads for first time
+// Load user's todos when page loads for first time
   useEffect(() => {
     fetch('/api/user-todos')
-      .then(res => res.json() )
+      .then(res => res.json())
       .then(todos => {
-        modifyTodos(todos)
+        if ( Array.isArray(todos) && todos[0] && todos[0].id !== 0 )  { // Use database todos unless problem with array
+          modifyTodos(todos)
+        }
       })
   }, [])
 
+// Update users todo storage when modified
   useEffect(() => {
-
-
+    fetch('api/user-todos', {
+      method: 'PUT',
+      body: JSON.stringify({todos}),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('Success:', data)
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    })
   }, [todos])
 
 
-  // Add new todo to list
+// Add new todo to list
   const submitNewTodo = (newTask) => {
     let d = new Date()
-    let timeBasedID = d.getTime() // Generates a unique ID based on the time the todo is submitted
+    let timeBasedID = d.getTime() // Generates a unique-to-user ID based on the time the todo is submitted
     let newTodo = {
       id: timeBasedID,
       task: newTask,
@@ -40,14 +53,14 @@ const App = () => {
     modifyTodos(oldTodos => [...oldTodos, newTodo])
   }
 
-  // Delete todo
+// Delete todo
   const removeTodo = (id) => {
     modifyTodos(
       todos.filter(todo => todo.id !== id)
     )
   }
 
-  // Toggle a todo's completion status
+// Toggle a todo's completion status
   const toggleCompleted = (id) => {
     let updatedTodos = todos.map(todo => {
       if (todo.id === id) {
