@@ -1,24 +1,29 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-function Signup() {
+function Signup({ setUser }) {
   const history = useHistory()
 
 // Handle form submission
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
     const form = e.target
     const data = new FormData(form)
-    await fetch('/login', {
+    fetch('/login', {
      method: 'POST',
      body: data,
     })
+    .then( res => res.json() )
+    .then( user => setUser(user) )
+
     history.push('/')
-}
+  }
 
   return(
     <div className='login-container'>
+
       <h1>Login</h1>
+
       <form onSubmit={handleSubmit} name='login' className='login-form'>
 
           <label htmlFor='username'>
@@ -36,7 +41,9 @@ function Signup() {
             name='password'/>
 
         <button id='submit-button'>Login</button>
+
       </form>
+
     </div>
   )
 }

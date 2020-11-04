@@ -90,10 +90,6 @@ app.use(session({secret: process.env.COOKIE_SECRET, resave: false, saveUninitial
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.json())
-app.use(function(req, res, next) {
-  res.locals.currentUser = req.user
-  next()
-});
 
 
 app.post(
@@ -120,22 +116,18 @@ app.post(
 
 app.post(
   '/login',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/signup'
-  })
-)
+  passport.authenticate('local'),function(req, res, next) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.json(req.user)
+})
 
 app.get('/logout',
   function(req, res, next) {
     req.session.destroy()
-    next()
+    res.redirect('/login')
   }
 )
-
-
-
-
 
 app.get(
   '/api/user-todos', loggedIn,
