@@ -32,14 +32,19 @@ header {
     right: 0;
     top: 0;
     display: flex;
-    flex-wrap: nowrap; }
-    header nav .nav-item {
+    flex-wrap: nowrap;
+    align-items: center; }
+    header nav .nav-item, header nav .nav-button {
       margin-right: 10px;
-      background: red; }
+      color: #fcfcfc;
+      text-decoration: none; }
+    header nav .nav-button {
+      padding: 5px;
+      border-radius: 5px;
+      background: #7aadb8; }
     @media only screen and (min-width: 1200px) {
       header nav {
-        height: 5vh;
-        line-height: 5vh; } }
+        height: 5vh; } }
 
 main {
   width: 90%;

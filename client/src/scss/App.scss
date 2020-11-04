@@ -27,10 +27,8 @@ header{
 
   .logo {
     position: relative;
-
     width: fit-content;
     margin: 0 auto;
-
     font-family: 'Baloo Tamma 2', cursive;
     font-weight: 800;
     font-size: 1em;
@@ -42,18 +40,24 @@ header{
     position: absolute;
     right: 0;
     top: 0;
-
     display: flex;
     flex-wrap: nowrap;
+    align-items: center;
 
-    .nav-item {;
+    .nav-item, .nav-button {
       margin-right: 10px;
-      background: red;
+      color: $near-white;
+      text-decoration: none;
+    }
+
+    .nav-button {
+      padding: 5px;
+      border-radius: 5px;
+      background: $primary-light;
     }
 
     @media only screen and (min-width: $breakpoint-pc) {
         height: 5vh;
-        line-height: 5vh;
     }
   }
 }

@@ -7,6 +7,8 @@ import './scss/Todos.scss'
 
 function Todos({ user }) {
 
+// TODO: fix new user default todo problem
+
 // Default single todo to display to unregsitered or brand new users
   const defaultTodos = [{
     id: 0,
