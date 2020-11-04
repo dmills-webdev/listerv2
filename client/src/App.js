@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, NavLink, Route } from 'react-router-dom'
 
 import Signup from './Signup'
 import Login from './Login'
@@ -23,10 +23,12 @@ function App() {
       <div>
 
         <header>
-
-          <div className='logo'>
-            Lister
-          </div>
+          <NavLink
+            to='/' exact
+            activeClassName='activeLink'
+            className='logo'>
+              Lister
+          </NavLink>
 
           {/*Change navbar options depending on if the user is logged in or not*/}
           { user ?
@@ -34,7 +36,6 @@ function App() {
             :
             <NavbarLoggedOut/>
           }
-
         </header>
 
         <main>

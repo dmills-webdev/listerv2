@@ -19,6 +19,7 @@
 header{
   width: 100%;
   height: 1em;
+  margin-bottom: 0.4em;
   background: $primary;
 
   @media only screen and (min-width: $breakpoint-pc) {
@@ -27,6 +28,7 @@ header{
 
   .logo {
     position: relative;
+    display: block;
     width: fit-content;
     margin: 0 auto;
     font-family: 'Baloo Tamma 2', cursive;
@@ -34,6 +36,7 @@ header{
     font-size: 1em;
     text-shadow: 0.075em 0.075em hsla(190, 30%, 20%, 1);
     color: $white;
+    text-decoration: none;
   }
 
   nav {
@@ -49,10 +52,13 @@ header{
       color: $near-white;
       text-decoration: none;
     }
-
     .nav-button {
       padding: 5px;
       border-radius: 5px;
+      background: $primary;
+      transition: background-color 0.1s;
+    }
+    .nav-button:hover {
       background: $primary-light;
     }
 
