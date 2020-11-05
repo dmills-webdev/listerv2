@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap");
-.signup-container {
+.login-container {
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 100%;
   background: #7aadb8;
   background: linear-gradient(225deg, #bdd6db 0%, #7aadb8 100%); }
-  .signup-container .welcome-banner {
+  .login-container .welcome-banner {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,20 +15,20 @@
     flex: 1;
     padding: 20px;
     text-align: center; }
-    .signup-container .welcome-banner h1 {
+    .login-container .welcome-banner h1 {
       font-size: 2em;
       font-weight: 300;
       color: #fcfcfc;
       text-shadow: 1px 1px 5px #7aadb8; }
-    .signup-container .welcome-banner h2 {
+    .login-container .welcome-banner h2 {
       display: block;
       width: 70%;
       margin: 0 auto;
       color: #fcfcfc;
       font-weight: 400; }
-  .signup-container .form-area {
+  .login-container .form-area {
     flex: 1; }
-    .signup-container .form-area .signup-form {
+    .login-container .form-area .login-form {
       display: flex;
       flex-direction: column;
       position: relative;
@@ -39,7 +39,7 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       background: white; }
-      .signup-container .form-area .signup-form label {
+      .login-container .form-area .login-form label {
         display: block;
         position: relative;
         bottom: -1.5em;
@@ -48,23 +48,21 @@
         color: #666666;
         pointer-events: none;
         transition: bottom 0.3s, font-size 0.3s; }
-      .signup-container .form-area .signup-form .focussedLabel {
+      .login-container .form-area .login-form .focussedLabel {
         font-size: 0.75rem;
         bottom: 0; }
-      .signup-container .form-area .signup-form input {
+      .login-container .form-area .login-form input {
         border-bottom: 1px dotted #e6e6e6;
         height: 2em; }
-    .signup-container .form-area .submit-proxy-button {
+    .login-container .form-area .submit-proxy-button {
       display: block;
       position: relative;
-      top: calc(0em - 1em - 15%);
+      top: calc(0em - 2em - 10%);
       width: 70%;
       margin: 0 auto;
       height: 2em;
       border-radius: 1em;
       background: #477a85;
       color: white;
-      font-size: 1.4rem;
-      font-weight: 300;
       line-height: 2em;
       text-align: center; }

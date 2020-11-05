@@ -20,9 +20,7 @@ function App() {
 
   return(
     <BrowserRouter>
-      <div>
-
-        <header>
+        <header className='main-header'>
           <NavLink
             to='/' exact
             activeClassName='activeLink'
@@ -57,8 +55,6 @@ function App() {
                 user={user}/>
             )} />
         </main>
-
-      </div>
     </BrowserRouter>
   )
 }

@@ -10,7 +10,7 @@ function NavbarLoggedIn({ user, setUser }) {
   }
   return (
     <nav>
-      <div className='nav-item'>
+      <div className='nav-user'>
         {user.username}
       </div>
       <div className='nav-button' onClick={logout}>

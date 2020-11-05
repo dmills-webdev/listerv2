@@ -23,34 +23,64 @@ function Signup() {
     }
   }
 
+  function moveLabel(e) {
+    const label = document.getElementById(e.target.name)
+    if (e.target.value === '') {
+      label.classList.toggle('focussedLabel')
+    }
+  }
+
   return(
     <div className='signup-container'>
+
+    <div className='welcome-banner'>
+      <h1>
+        Create account? Check.
+      </h1>
+      <h2>
+        Signup to Lister for free and can keep your lists synced, on all your devices, all the time.
+      </h2>
+    </div>
+
+    <div className='form-area'>
       <form onSubmit={handleSubmit} name='signup' className='signup-form'>
 
-          <label htmlFor='username'>
+          <label htmlFor='username' id='username'>
             Username
           </label>
           <input
             type='text'
-            name='username'/>
+            name='username'
+            onFocus={moveLabel}
+            onBlur={moveLabel}/>
 
-          <label htmlFor='password'>
+          <label htmlFor='password' id='password'>
             Password
           </label>
           <input
             type='password'
-            name='password'/>
+            name='password'
+            onFocus={moveLabel}
+            onBlur={moveLabel}/>
 
-          <label htmlFor='passwordConfirmation'>
-            Password
+          <label htmlFor='passwordConfirmation' id='passwordConfirmation'>
+            Confirm password
           </label>
           <input
             type='password'
-            name='passwordConfirmation'/>
+            name='passwordConfirmation'
+            onFocus={moveLabel}
+            onBlur={moveLabel}/>
 
-        <button id='submit-button'>Sign up</button>
+        <button name='submit-button' id='submit-button' hidden>Sign up</button>
       </form>
+
+      <label htmlFor='submit-button' className='submit-proxy-button'>
+        Signup
+      </label>
+
     </div>
+  </div>
   )
 }
 

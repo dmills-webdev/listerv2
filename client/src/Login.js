@@ -1,6 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
+import './scss/Login.scss'
+
 function Signup({ setUser }) {
   const history = useHistory()
 
@@ -15,35 +17,57 @@ function Signup({ setUser }) {
     })
     .then( res => res.json() )
     .then( user => setUser(user) )
-
     history.push('/')
+  }
+
+  function moveLabel(e) {
+    const label = document.getElementById(e.target.name)
+    if (e.target.value === '') {
+      label.classList.toggle('focussedLabel')
+    }
   }
 
   return(
     <div className='login-container'>
 
-      <h1>Login</h1>
+      <div className='welcome-banner'>
+        <h1>
+          Welcome back!
+        </h1>
+        <h2>
+          Login and keep your lists synced across all your devices.
+        </h2>
+      </div>
 
-      <form onSubmit={handleSubmit} name='login' className='login-form'>
+      <div className='form-area'>
+        <form onSubmit={handleSubmit} name='login' className='login-form'>
 
-          <label htmlFor='username'>
-            Username
-          </label>
-          <input
-            type='text'
-            name='username'/>
+            <label htmlFor='username' id='username'>
+              Username
+            </label>
+            <input
+              type='text'
+              name='username'
+              onFocus={moveLabel}
+              onBlur={moveLabel}/>
 
-          <label htmlFor='password'>
-            Password
-          </label>
-          <input
-            type='password'
-            name='password'/>
+            <label htmlFor='password' id='password'>
+              Password
+            </label>
+            <input
+              type='password'
+              name='password'
+              onFocus={moveLabel}
+              onBlur={moveLabel}/>
 
-        <button id='submit-button'>Login</button>
+          <button name='submit-button' id='submit-button' hidden></button>
+        </form>
 
-      </form>
+        <label htmlFor='submit-button' className='submit-proxy-button'>
+          Login
+        </label>
 
+      </div>
     </div>
   )
 }

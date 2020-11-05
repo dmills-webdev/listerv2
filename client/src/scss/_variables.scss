@@ -3,6 +3,8 @@ $breakpoint-pc: 1200px;
 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap');
+$normal-font: 'Source Sans Pro', sans-serif;
 
 // Blacks and whites
 $black:       hsla(0, 0%, 0%, 1);
@@ -21,10 +23,9 @@ $white:       hsla(0, 0%, 100%, 1);
 $primary:       hsla(190, 30%, 40%, 1);
 $primary-dark:  hsla(190, 30%, 20%, 1);
 $primary-light: hsla(190, 30%, 60%, 1);
+$primary-lightest: hsla(190, 30%, 80%, 1);
 
 $secondary: hsla(190, 30%, 98%, 1);
 
-
-
-
 //Misc
+$box-shadow:  hsla(0, 0, 0, 0.2);

@@ -6,9 +6,6 @@ import NewTodoForm from './components/NewTodoForm'
 import './scss/Todos.scss'
 
 function Todos({ user }) {
-
-// TODO: fix new user default todo problem
-
 // Default single todo to display to unregsitered or brand new users
   const defaultTodos = [{
     id: 0,
@@ -17,6 +14,7 @@ function Todos({ user }) {
   }]
   const [ todos, modifyTodos ] = useState(defaultTodos)
 
+
 // Load user's todos
   useEffect(() => {
     // If locally the user seems to be logged in then fetch their todos
@@ -24,7 +22,7 @@ function Todos({ user }) {
       fetch('/api/user-todos')
         .then(res => res.json())
         .then(todos => {
-          if ( Array.isArray(todos) && todos[0] && todos[0].id !== 0 )  { // Use database todos unless problem with array
+          if ( Array.isArray(todos) && ( (todos[0]&&todos[0].id!==0) || todos[1]) )  { // Use database todos unless problem with array
             modifyTodos(todos)
           }
         })
@@ -34,7 +32,6 @@ function Todos({ user }) {
       modifyTodos(defaultTodos)
     }
   }, [user])
-
 
 
 // Update users todo storage when modified
@@ -68,12 +65,14 @@ function Todos({ user }) {
     modifyTodos(oldTodos => [...oldTodos, newTodo]) // Add todo onto end of existing todo array
   }
 
+
 // Delete todo
   const removeTodo = (id) => {
     modifyTodos(
       todos.filter(todo => todo.id !== id) // FIlter out the id in question and make that the new existing todo array
     )
   }
+
 
 // Toggle a todo's completion status
   const toggleCompleted = (id) => {
@@ -87,7 +86,6 @@ function Todos({ user }) {
       updatedTodos
     )
   }
-
 ///////////////////////////////////////////////////////////////// Presentational
   return(
     <div>
