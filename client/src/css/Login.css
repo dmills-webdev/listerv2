@@ -7,6 +7,16 @@
   min-height: 100%;
   background: #7aadb8;
   background: linear-gradient(225deg, #bdd6db 0%, #7aadb8 100%); }
+  @media only screen and (min-width: 1200px) {
+    .login-container {
+      position: relative;
+      top: 15%;
+      min-height: 70%;
+      max-height: 70%;
+      width: 40%;
+      min-width: 400px;
+      margin: 0 auto;
+      border-radius: 10px; } }
   .login-container .welcome-banner {
     display: flex;
     flex-direction: column;
@@ -16,16 +26,18 @@
     padding: 20px;
     text-align: center; }
     .login-container .welcome-banner h1 {
-      font-size: 2em;
-      font-weight: 300;
+      font-size: 3em;
+      font-weight: 400;
       color: #fcfcfc;
       text-shadow: 1px 1px 5px #7aadb8; }
     .login-container .welcome-banner h2 {
       display: block;
-      width: 70%;
+      width: 80%;
       margin: 0 auto;
       color: #fcfcfc;
-      font-weight: 400; }
+      font-size: 1.1em;
+      font-weight: 400;
+      text-shadow: 1px 1px 2px #7aadb8; }
   .login-container .form-area {
     flex: 1; }
     .login-container .form-area .login-form {
@@ -39,6 +51,11 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       background: white; }
+      @media only screen and (min-width: 1200px) {
+        .login-container .form-area .login-form {
+          width: 120%;
+          right: 10%;
+          border-radius: 20px; } }
       .login-container .form-area .login-form label {
         display: block;
         position: relative;
@@ -57,12 +74,16 @@
     .login-container .form-area .submit-proxy-button {
       display: block;
       position: relative;
-      top: calc(0em - 2em - 10%);
+      top: calc(0em - 1em - 15%);
       width: 70%;
       margin: 0 auto;
       height: 2em;
       border-radius: 1em;
       background: #477a85;
+      transition: background 0.1s ease-out;
       color: white;
+      font-size: 1.4rem;
       line-height: 2em;
       text-align: center; }
+    .login-container .form-area .submit-proxy-button:hover {
+      background: #365c63; }

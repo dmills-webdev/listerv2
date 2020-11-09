@@ -25,6 +25,11 @@ body {
   width: 100%;
 }
 
+// Misc
+.nav-popout {
+  display: flex;
+}
+
 
 
 .main-header{
@@ -49,37 +54,20 @@ body {
     text-decoration: none;
   }
 
-  nav {
+  .hamburger-icon {
     position: absolute;
-    right: 0;
     top: 0;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    height: inherit;
-
-    .nav-user, .nav-button {
-      margin-right: 10px;
-      color: $near-white;
-      text-decoration: none;
-    }
-    .nav-user {
+    right: 10px;
+    height: 5vmax;
+    font-size: 3vmax;
+    color: $secondary;
+    @media only screen and (min-width: $breakpoint-pc) {
       display: none;
-      @media only screen and (min-width: $breakpoint-pc) {
-        display: block;
-      }
     }
-    .nav-button {
-      padding: 5px;
-      border-radius: 5px;
-      background: $primary;
-      transition: background-color 0.1s;
-    }
-    .nav-button:hover {
-      background: $primary-light;
+    img {
+      height: 100%;
     }
   }
-
 }
 
 main {

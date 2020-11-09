@@ -20,6 +20,7 @@ function Signup({ setUser }) {
     history.push('/')
   }
 
+  // Moves fake placeholder text on inputs move and stay at the new position as long as the input isn't empty
   function moveLabel(e) {
     const label = document.getElementById(e.target.name)
     if (e.target.value === '') {

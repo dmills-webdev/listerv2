@@ -1,6 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import '../scss/Navbar.scss'
+
+function toggleMenu(e) {
+  const menu = document.getElementById('main-nav')
+  menu.classList.toggle('nav-popout')
+}
 
 function NavbarLoggedIn({ user, setUser }) {
   // Log current user out
@@ -9,7 +15,7 @@ function NavbarLoggedIn({ user, setUser }) {
     .then( setUser(null) )
   }
   return (
-    <nav>
+    <nav id='main-nav'>
       <div className='nav-user'>
         {user.username}
       </div>
@@ -21,20 +27,22 @@ function NavbarLoggedIn({ user, setUser }) {
 }
 
 function NavbarLoggedOut() {
+
   return (
-    <nav>
+    <nav id='main-nav'>
+      <NavLink
+        to='/login' exact
+        activeClassName='activeLink'
+        className='nav-button'
+        onclick={toggleMenu}>
+          Login
+      </NavLink>
+
       <NavLink
         to='/signup' exact
         activeClassName='activeLink'
         className='nav-button'>
           Signup
-      </NavLink>
-
-      <NavLink
-        to='/login' exact
-        activeClassName='activeLink'
-        className='nav-button'>
-          Login
       </NavLink>
 
       <NavLink

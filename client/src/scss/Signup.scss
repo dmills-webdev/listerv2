@@ -7,6 +7,16 @@
   min-height: 100%;
   background: $primary-light;
   background: linear-gradient(225deg, $primary-lightest 0%, $primary-light 100%);
+  @media only screen and (min-width: $breakpoint-pc) {
+    position: relative; // Vertically center container
+    top: 15%;// Vertically center container
+    min-height: 70%;
+    max-height: 70%;
+    width: 40%;
+    min-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
 
   .welcome-banner {
     display: flex;
@@ -18,22 +28,28 @@
     text-align: center;
 
     h1 {
-      font-size: 2em;
-      font-weight: 300;
+      font-size: 3em;
+      font-weight: 400;
       color: $near-white;
       text-shadow: 1px 1px 5px $primary-light;
     }
     h2 {
       display: block;
-      width: 70%;
+      width: 80%;
       margin: 0 auto;
       color: $near-white;
+      font-size: 1.1em;
       font-weight: 400;
+      text-shadow: 1px 1px 2px $primary-light;
     }
   }
 
   .form-area {
     flex: 1;
+    @media only screen and (min-width: $breakpoint-pc) {
+      margin-top: 15%;
+    }
+
 
     .signup-form {
       display: flex;
@@ -46,6 +62,11 @@
       border-radius: 10px;
       box-shadow: 0 0 10px $box-shadow;
       background: $white;
+      @media only screen and (min-width: $breakpoint-pc) {
+        width: 120%;
+        right: 10%;
+        border-radius: 20px;
+      }
 
       label {
         display: block;
@@ -76,11 +97,14 @@
       height: 2em;
       border-radius: 1em;
       background: $primary;
+      transition: background 0.1s ease-out;
       color: $white;
       font-size: 1.4rem;
-      font-weight: 300;
       line-height: 2em;
       text-align: center;
+    }
+    .submit-proxy-button:hover {
+      background: $primary-dark
     }
   }
 }

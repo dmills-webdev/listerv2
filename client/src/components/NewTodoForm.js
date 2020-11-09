@@ -1,7 +1,9 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
+
+import add from '../assets/add.svg'
 
 const NewTodoForm = ({ submitNewTodo }) => {
-  let [ task, updateTask ] = useState("")
+  let [ task, updateTask ] = useState('')
 
   const handleInputChange = (e) => {
     updateTask(
@@ -12,25 +14,24 @@ const NewTodoForm = ({ submitNewTodo }) => {
   const handleSubmit = (e) => {
     e.preventDefault()    // Prevent form submission
     submitNewTodo(task)   // Submit todo
-    updateTask("")        // Clear textbox
+    updateTask('')        // Clear textbox
   }
 
   return(
-    <div className="new-todo-form">
-      <form onSubmit={(e) => handleSubmit(e)} autoComplete="off">
+    <div className='new-todo-form'>
+      <form onSubmit={(e) => handleSubmit(e)} autoComplete='off'>
         <label>
           <input
-            name="task"
+            name='task'
             value={task}
-            placeholder="E.g. Water the plants"
+            placeholder='E.g. Water the plants'
             onChange={handleInputChange}
-            type="text">
+            type='text'>
           </input>
         </label>
 
-        <button
-          type="submit">
-            +
+        <button type='submit'>
+          <img src={add} alt='plus symbol icon'/>
         </button>
       </form>
     </div>

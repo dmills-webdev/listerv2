@@ -35,10 +35,13 @@ function Signup() {
 
     <div className='welcome-banner'>
       <h1>
-        Create account? Check.
+        Lister account?
+      </h1>
+      <h1>
+        Check.
       </h1>
       <h2>
-        Signup to Lister for free and can keep your lists synced, on all your devices, all the time.
+        Signup to Lister for free and keep your lists synced, on all your devices, all the time.
       </h2>
     </div>
 

@@ -7,6 +7,16 @@
   min-height: 100%;
   background: #7aadb8;
   background: linear-gradient(225deg, #bdd6db 0%, #7aadb8 100%); }
+  @media only screen and (min-width: 1200px) {
+    .signup-container {
+      position: relative;
+      top: 15%;
+      min-height: 70%;
+      max-height: 70%;
+      width: 40%;
+      min-width: 400px;
+      margin: 0 auto;
+      border-radius: 10px; } }
   .signup-container .welcome-banner {
     display: flex;
     flex-direction: column;
@@ -16,18 +26,23 @@
     padding: 20px;
     text-align: center; }
     .signup-container .welcome-banner h1 {
-      font-size: 2em;
-      font-weight: 300;
+      font-size: 3em;
+      font-weight: 400;
       color: #fcfcfc;
       text-shadow: 1px 1px 5px #7aadb8; }
     .signup-container .welcome-banner h2 {
       display: block;
-      width: 70%;
+      width: 80%;
       margin: 0 auto;
       color: #fcfcfc;
-      font-weight: 400; }
+      font-size: 1.1em;
+      font-weight: 400;
+      text-shadow: 1px 1px 2px #7aadb8; }
   .signup-container .form-area {
     flex: 1; }
+    @media only screen and (min-width: 1200px) {
+      .signup-container .form-area {
+        margin-top: 15%; } }
     .signup-container .form-area .signup-form {
       display: flex;
       flex-direction: column;
@@ -39,6 +54,11 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       background: white; }
+      @media only screen and (min-width: 1200px) {
+        .signup-container .form-area .signup-form {
+          width: 120%;
+          right: 10%;
+          border-radius: 20px; } }
       .signup-container .form-area .signup-form label {
         display: block;
         position: relative;
@@ -63,8 +83,10 @@
       height: 2em;
       border-radius: 1em;
       background: #477a85;
+      transition: background 0.1s ease-out;
       color: white;
       font-size: 1.4rem;
-      font-weight: 300;
       line-height: 2em;
       text-align: center; }
+    .signup-container .form-area .submit-proxy-button:hover {
+      background: #365c63; }

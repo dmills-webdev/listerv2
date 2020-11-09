@@ -53,10 +53,19 @@
     line-height: 100%;
   }
   button {
-    padding: 0 10px;
     margin-left: 10px;
     background: $primary-light;
+    transition: background 0.1s ease-out;
+    border-radius: 5px;
     color: $white;
+    outline: none;
+
+    img {
+      height: 100%;
+    }
+  }
+  button:hover {
+    background: $primary;
   }
 
   [placeholder]:focus::placeholder {

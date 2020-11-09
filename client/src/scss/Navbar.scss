@@ -1,0 +1,73 @@
+@import './variables.scss';
+
+nav {
+  position: absolute;
+  right: 0;
+  top: 5vmax;
+  width: fit-content;
+  min-width: 30vmin;
+  display: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  box-shadow: 0 0 10px $box-shadow;
+  background: $secondary;
+
+  @media only screen and (min-width: $breakpoint-pc) {
+    top: 0;
+    width: auto;
+    min-width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: inherit;
+    box-shadow: none;
+    background: inherit;
+  }
+
+  :not(:last-child) {
+    border-bottom: 1px solid $grey3;
+    @media only screen and (min-width: $breakpoint-pc) {
+      border-bottom: none;
+    }
+  }
+
+  .nav-user, .nav-button {
+    color: $near-black;
+    text-decoration: none;
+    text-align: center;
+
+    @media only screen and (min-width: $breakpoint-pc) {
+        margin-right: 10px;
+        color: $near-white;
+        text-decoration: none;
+    }
+  }
+
+  .nav-user {
+    display: none;
+    @media only screen and (min-width: $breakpoint-pc) {
+      display: block;
+    }
+  }
+
+  .nav-button {
+    width: 100%;
+    padding: 10px;
+    background: $secondary;
+    @media only screen and (min-width: $breakpoint-pc) {
+      width: auto;
+      padding: 5px;
+      border-radius: 5px;
+      background: $primary;
+      transition: background-color 0.1s;
+    }
+  }
+  .nav-button:hover {
+    background: $primary-light;
+  }
+}
+
+nav * {
+
+}
