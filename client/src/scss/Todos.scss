@@ -64,8 +64,10 @@
       height: 100%;
     }
   }
-  button:hover {
-    background: $primary;
+  @media only screen and (min-width: $breakpoint-pc) {
+    button:hover {
+      background: $primary;
+    }
   }
 
   [placeholder]:focus::placeholder {

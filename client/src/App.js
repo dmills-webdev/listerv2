@@ -18,9 +18,20 @@ function App() {
     menu.classList.toggle('nav-popout')
   }
 
+  function getUsername() {
+    if (user !== null) {
+      return user.username
+    }
+  }
+
   return(
     <BrowserRouter>
         <header className='main-header'>
+
+          <div className='mobile-username'>
+            {getUsername()}
+          </div>
+
           <NavLink
             to='/' exact
             activeClassName='activeLink'

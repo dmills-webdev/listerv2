@@ -33,6 +33,16 @@ body {
   @media only screen and (min-width: 1200px) {
     .main-header {
       font-size: 5vmin; } }
+  .main-header .mobile-username {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 5vmax;
+    line-height: 5vmax;
+    color: #7aadb8; }
+    @media only screen and (min-width: 1200px) {
+      .main-header .mobile-username {
+        display: none; } }
   .main-header .logo {
     position: relative;
     display: block;
@@ -58,11 +68,12 @@ body {
       height: 100%; }
 
 main {
-  height: 100%; }
+  height: 100%;
+  width: 100%;
+  margin: 0 auto; }
   @media only screen and (min-width: 1200px) {
     main {
-      width: 50%;
-      margin: 0 auto; } }
+      width: 50%; } }
   main .float-right {
     float: right; }
   main .completed-todo {

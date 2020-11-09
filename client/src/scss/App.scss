@@ -41,6 +41,18 @@ body {
     font-size: 5vmin;
   }
 
+  .mobile-username {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 5vmax;
+    line-height: 5vmax;
+    color: $primary-light;
+    @media only screen and (min-width: $breakpoint-pc) { //Mobile only
+      display: none;
+    }
+  }
+
   .logo {
     position: relative;
     display: block;
@@ -61,7 +73,7 @@ body {
     height: 5vmax;
     font-size: 3vmax;
     color: $secondary;
-    @media only screen and (min-width: $breakpoint-pc) {
+    @media only screen and (min-width: $breakpoint-pc) { //Mobile only
       display: none;
     }
     img {
@@ -72,9 +84,10 @@ body {
 
 main {
   height: 100%;
+  width: 100%;
+  margin: 0 auto;
   @media only screen and (min-width: $breakpoint-pc) {
     width: 50%;
-    margin: 0 auto;
   }
 
   .float-right {
