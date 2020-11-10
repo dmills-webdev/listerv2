@@ -34,21 +34,23 @@ function NavbarLoggedOut() {
         to='/login' exact
         activeClassName='activeLink'
         className='nav-button'
-        onclick={toggleMenu}>
+        onClick={toggleMenu}>
           Login
       </NavLink>
 
       <NavLink
         to='/signup' exact
         activeClassName='activeLink'
-        className='nav-button'>
+        className='nav-button'
+        onClick={toggleMenu}>
           Signup
       </NavLink>
 
       <NavLink
         to='/' exact
         activeClassName='activeLink'
-        className='nav-button'>
+        className='nav-button'
+        onClick={toggleMenu}>
           Todos
       </NavLink>
     </nav>

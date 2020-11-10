@@ -58,14 +58,15 @@ body {
     position: absolute;
     top: 0;
     right: 10px;
-    height: 5vmax;
-    font-size: 3vmax;
-    color: #f8fbfb; }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 5vmax; }
     @media only screen and (min-width: 1200px) {
       .main-header .hamburger-icon {
         display: none; } }
     .main-header .hamburger-icon img {
-      height: 100%; }
+      height: 80%; }
 
 main {
   height: 100%;

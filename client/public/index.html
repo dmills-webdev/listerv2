@@ -3,11 +3,18 @@
 
 <head>
   <title>Lister</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+  <script>
+    // Prevents on screen keyboard in android from shrinking the viewport
+    var viewport = document.querySelector("meta[name=viewport]");
+    viewport.setAttribute("content", viewport.content + ", height=" + window.innerHeight);
+  </script>
 </head>
 
 <body>
-<div id="root"></div>
-
+  <div id="root"></div>
 </body>
+
 </html>
