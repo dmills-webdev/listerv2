@@ -25,7 +25,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1;
+    flex: 1 1 auto;
     padding: 20px;
     text-align: center;
 
@@ -47,7 +47,7 @@
   }
 
   .form-area {
-    flex: 1;
+    flex: 1 1 auto;
     @media only screen and (min-width: $breakpoint-pc) {
       margin-top: 15%;
     }
@@ -56,7 +56,6 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      top: -15%; // See below on submit-proxy-button
       width: 90%;
       margin: 0 auto;
       padding: 0 20px 3em 20px;
@@ -64,6 +63,7 @@
       box-shadow: 0 0 10px $box-shadow;
       background: $white;
       @media only screen and (min-width: $breakpoint-pc) {
+        top: -15%; // See below on submit-proxy-button
         width: 120%;
         right: 10%;
         border-radius: 20px;
@@ -92,7 +92,7 @@
     .submit-proxy-button {
       display: block;
       position: relative;
-      top: calc(0em - 1em - 15%); // Submit button intersect form at half its height
+      top: calc(0em - 1em); // Submit button intersect form at half its height
       width: 70%;
       margin: 0 auto;
       height: 2em;
@@ -103,6 +103,9 @@
       font-size: 1.4rem;
       line-height: 2em;
       text-align: center;
+      @media only screen and (min-width: $breakpoint-pc) {
+        top: calc(0em - 1em - 15%); // Submit button intersect form at half its height
+      }
     }
     .submit-proxy-button:hover {
       background: $primary-dark
