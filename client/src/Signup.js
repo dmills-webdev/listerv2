@@ -18,7 +18,11 @@ function Signup() {
     })
     .then( res => res.json() )
     .then( data => {isUsernameFree = data} )
-    if ((isUsernameFree) && (password === passwordConfirmation) && (password.length > 8)) {
+    if (
+      (isUsernameFree) &&
+      (password === passwordConfirmation) &&
+      (password.length > 8))
+    {
       console.log('Form OK')
       return true
     }

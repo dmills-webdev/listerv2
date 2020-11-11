@@ -33,12 +33,6 @@ const upload = multer()
 app.use(upload.array())
 app.use(express.static('public'))
 
-
-
-
-
-
-
 // Verify is user is logged in
 function loggedIn(req, res, next) {
   if (req.user) {
@@ -47,11 +41,6 @@ function loggedIn(req, res, next) {
     res.redirect('/login')
   }
 }
-
-
-
-
-
 
 // Verify login details against database of users
 passport.use(
@@ -85,20 +74,29 @@ passport.deserializeUser(function(id, done) {
   })
 })
 
-// App init
+// App middleware
 app.use(session({secret: process.env.COOKIE_SECRET, resave: false, saveUninitialized: true}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.json())
 
 
+// Signup request
 app.post(
   '/signup',
   async function(req, res, next) {
+      // Generate passoword hash for database storage
     await bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
       if (err) {
         return next(err)
       }
+      // Confirm username definitely isn't alredy registered
+      const doc = await User.findOne({username: username})
+      if (doc !== null) {
+        console.log('Username in use')
+        res.json(false)
+      }
+      // Create and save user to database
       const user = new User({
         username: req.body.username,
         password: hashedPassword,
@@ -114,6 +112,7 @@ app.post(
   }
 )
 
+// Login request
 app.post(
   '/login',
   passport.authenticate('local'),function(req, res, next) {
@@ -123,6 +122,7 @@ app.post(
   }
 )
 
+// Logout request
 app.get('/logout',
   function(req, res, next) {
     req.session.destroy()
@@ -130,6 +130,8 @@ app.get('/logout',
   }
 )
 
+
+// API call to retrieve a user's todos
 app.get(
   '/api/user-todos', loggedIn,
   function(req, res, next) {
@@ -141,6 +143,7 @@ app.get(
   }
 )
 
+// API call to update a user's todos
 app.put(
   '/api/user-todos', loggedIn,
   async function(req, res, next) {
@@ -153,8 +156,7 @@ app.put(
   }
 )
 
-
-
+// API call to check if a username is already taken
 app.post(
   '/api/signup/check-if-username-is-taken',
   async function(req, res, next) {
@@ -176,7 +178,7 @@ app.post(
 
 
 
-
+// Run server
 app.listen(3001, function() {
   console.log('App running on port 3001, Woo!')
 })
