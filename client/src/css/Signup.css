@@ -16,7 +16,9 @@
       width: 40%;
       min-width: 400px;
       margin: 0 auto;
-      border-radius: 10px; } }
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: #7aadb8; } }
   .signup-container .welcome-banner {
     display: flex;
     flex-direction: column;

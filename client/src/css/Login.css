@@ -16,7 +16,9 @@
       width: 40%;
       min-width: 400px;
       margin: 0 auto;
-      border-radius: 10px; } }
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: #7aadb8; } }
   .login-container .welcome-banner {
     display: flex;
     flex-direction: column;
@@ -39,7 +41,7 @@
       font-weight: 400;
       text-shadow: 1px 1px 2px #7aadb8; }
   .login-container .form-area {
-    flex: 1 3 auto; }
+    flex: 1 1 auto; }
     @media only screen and (min-width: 1200px) {
       .login-container .form-area {
         margin-top: 15%; } }

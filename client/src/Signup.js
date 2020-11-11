@@ -6,10 +6,38 @@ import './scss/Signup.scss'
 function Signup() {
   const history = useHistory()
 
+  async function validateForm(e) {
+    const username = e.target.username.value
+    const password = e.target.password.value
+    const passwordConfirmation = e.target.passwordConfirmation.value
+    let isUsernameFree
+    await fetch('/api/signup/check-if-username-is-taken', {
+     method: 'POST',
+     body: JSON.stringify({ username }),
+     headers: { 'Content-Type': 'application/json' }
+    })
+    .then( res => res.json() )
+    .then( data => {isUsernameFree = data} )
+    if ((isUsernameFree) && (password === passwordConfirmation) && (password.length > 8)) {
+      console.log('Form OK')
+      return true
+    }
+    else {
+      console.log('Form BAD')
+      return false
+    }
+  }
+
 // Handle form submission
   async function handleSubmit(e) {
     e.preventDefault()
-    if (e.target.password.value === e.target.passwordConfirmation.value )  {
+    e.persist()
+
+    let isSubmissionValid
+    await validateForm(e)
+    .then(submissionValidity => {isSubmissionValid = submissionValidity})
+
+    if ( isSubmissionValid )  {
       const form = e.target
       const data = new FormData(form)
       await fetch('/signup', {

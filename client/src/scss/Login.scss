@@ -7,7 +7,6 @@
   min-height: 100%;
   background: $primary-light;
   background: linear-gradient(225deg, $primary-lightest 0%, $primary-light 100%);
-
   @media only screen and (min-width: $breakpoint-pc) {
     position: relative; // Vertically center container
     top: 15%;// Vertically center container
@@ -17,6 +16,8 @@
     min-width: 400px;
     margin: 0 auto;
     border-radius: 10px;
+    box-shadow: 0 0 10px $box-shadow;
+    background: $primary-light;
   }
 
 

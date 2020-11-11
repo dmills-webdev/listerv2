@@ -120,7 +120,8 @@ app.post(
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
     res.json(req.user)
-})
+  }
+)
 
 app.get('/logout',
   function(req, res, next) {
@@ -132,32 +133,43 @@ app.get('/logout',
 app.get(
   '/api/user-todos', loggedIn,
   function(req, res, next) {
-    User.findOne({ username: req.user.username })
+    User.findOne({username: req.user.username})
     .then(user => {
       res.send(user.todos)
     })
-    .catch(err => res.status(404).json({ success: false }))
-})
-
-
-
+    .catch(err => res.status(404).json({success: false}))
+  }
+)
 
 app.put(
   '/api/user-todos', loggedIn,
   async function(req, res, next) {
-
-  const body = req.body.todos
-  console.log(body)
-  const username = req.user.username
-
-  const doc = await User.findOne({username: username})
-  doc.todos = body
-  doc.save()
-
-  res.json('All good')
-})
+    const body = req.body.todos
+    const username = req.user.username
+    const doc = await User.findOne({username: username})
+    doc.todos = body
+    doc.save()
+    res.json('All good')
+  }
+)
 
 
+
+app.post(
+  '/api/signup/check-if-username-is-taken',
+  async function(req, res, next) {
+    const username = req.body.username
+    console.log(username)
+    const doc = await User.findOne({username: username})
+    if (doc !== null) {
+      console.log('Username in use')
+      res.json(false)
+    } else {
+      console.log('Username NOT in use')
+      res.json(true)
+    }
+  }
+)
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, NavLink, Route } from 'react-router-dom'
 
 import Signup from './Signup'
@@ -13,11 +13,13 @@ function App() {
   // App's local record if a user appears logged in or not, passed to Navbar
   const [ user, setUser ] = useState(null)
 
+  // Toggles dropdown menu visibility change on mobile site
   function toggleMenu(e) {
     const menu = document.getElementById('main-nav')
     menu.classList.toggle('nav-popout')
   }
 
+  // Gets the username of the user to display in the header bar
   function getUsername() {
     if (user !== null) {
       return user.username
