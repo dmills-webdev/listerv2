@@ -85,16 +85,19 @@ app.use(express.json())
 app.post(
   '/signup',
   async function(req, res, next) {
-      // Generate passoword hash for database storage
+    // Confirm serverside again that the username requested definitely isn't alredy registered
+    let usernameCheck
+    await User.findOne({username: req.body.username})
+    .then( user => {usernameCheck = user})
+    .catch( err => console.log(err) )
+    if (usernameCheck !== null) { // Should fail, meaning to user with that username exists
+      return next()
+    } 
+
+    // Generate passoword hash for database storage
     await bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
       if (err) {
         return next(err)
-      }
-      // Confirm username definitely isn't alredy registered
-      const doc = await User.findOne({username: username})
-      if (doc !== null) {
-        console.log('Username in use')
-        res.json(false)
       }
       // Create and save user to database
       const user = new User({
@@ -104,9 +107,9 @@ app.post(
       })
       .save(err => {
         if (err) {
-          return next(err)
+          console.log(err)
         }
-        res.redirect('/')
+        res.redirect('/login')
       })
     })
   }

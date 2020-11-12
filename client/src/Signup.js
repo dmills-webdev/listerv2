@@ -48,7 +48,7 @@ function Signup() {
        method: 'POST',
        body: data,
       })
-      history.push("/")
+      history.push("/login")
     }
     else {
       console.log('Error with inputs!')
