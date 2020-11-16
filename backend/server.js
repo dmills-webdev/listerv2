@@ -75,6 +75,7 @@ passport.deserializeUser(function(id, done) {
 })
 
 // App middleware
+app.use('/', express.static(path.join(__dirname, './client/build')))
 app.use(session({secret: process.env.COOKIE_SECRET, resave: false, saveUninitialized: true}))
 app.use(passport.initialize())
 app.use(passport.session())
