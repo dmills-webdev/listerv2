@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node app",
+    "start": "node server",
     "devstart": "nodemon app",
-    "serverstart": "DEBUG=backend:* npm run devstart"
+    "serverstart": "DEBUG=backend:* npm run devstart",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",

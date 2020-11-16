@@ -92,7 +92,7 @@ app.post(
     .catch( err => console.log(err) )
     if (usernameCheck !== null) { // Should fail, meaning to user with that username exists
       return next()
-    } 
+    }
 
     // Generate passoword hash for database storage
     await bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
@@ -178,10 +178,8 @@ app.post(
 
 
 
-
-
-
 // Run server
-app.listen(3001, function() {
-  console.log('App running on port 3001, Woo!')
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, function() {
+  console.log(`App running on port ${PORT}, Woo!`)
 })
