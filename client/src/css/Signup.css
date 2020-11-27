@@ -95,3 +95,8 @@
           top: calc(0em - 1em - 15%); } }
     .signup-container .form-area .submit-proxy-button:hover {
       background: #365c63; }
+    .signup-container .form-area .error-styling {
+      background-color: red;
+      width: 120%;
+      max-width: 120%;
+      right: 10%; }

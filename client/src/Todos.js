@@ -19,7 +19,7 @@ function Todos({ user }) {
   useEffect(() => {
     // If locally the user seems to be logged in then fetch their todos
     if (user !== null) {
-      fetch('/api/user-todos')
+      fetch('/api/todos')
         .then(res => res.json())
         .then(todos => {
           if ( Array.isArray(todos) && ( (todos[0]&&todos[0].id!==0) || todos[1]) )  { // Use database todos unless problem with array
@@ -37,7 +37,7 @@ function Todos({ user }) {
 // Update users todo storage when modified
   useEffect(() => {
     if (user !== null) { // Check if user appears logged in, if so then PUT the updated todos to the database
-      fetch('api/user-todos', {
+      fetch('api/todos', {
         method: 'PUT',
         body: JSON.stringify({todos}),
         headers: { 'Content-Type': 'application/json' }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from "react-router-dom"
 
 import './scss/Signup.scss'
@@ -6,20 +6,13 @@ import './scss/Signup.scss'
 function Signup() {
   const history = useHistory()
 
+  const [ submitText, modifySubmitText ] = useState('Submit')
+
+// Validate signup details
   async function validateForm(e) {
-    const username = e.target.username.value
     const password = e.target.password.value
     const passwordConfirmation = e.target.passwordConfirmation.value
-    let isUsernameFree
-    await fetch('/api/signup/check-if-username-is-taken', {
-     method: 'POST',
-     body: JSON.stringify({ username }),
-     headers: { 'Content-Type': 'application/json' }
-    })
-    .then( res => res.json() )
-    .then( data => {isUsernameFree = data} )
     if (
-      (isUsernameFree) &&
       (password === passwordConfirmation) &&
       (password.length > 8))
     {
@@ -32,11 +25,23 @@ function Signup() {
     }
   }
 
+// Display form errors
+  function displayFormErrorMessage( message ) {
+    modifySubmitText(message)
+    document.getElementById('submit-proxy').classList.toggle('error-styling')
+  }
+
+  function removeFormErrorMessage() {
+    modifySubmitText('Submit')
+    document.getElementById('submit-proxy').classList.remove('error-styling')
+  }
+
 // Handle form submission
   async function handleSubmit(e) {
     e.preventDefault()
-    e.persist()
+    e.persist() // Persist form event for clientside validation and then to be sent to server
 
+    // Call function to check form value validity
     let isSubmissionValid
     await validateForm(e)
     .then(submissionValidity => {isSubmissionValid = submissionValidity})
@@ -48,7 +53,15 @@ function Signup() {
        method: 'POST',
        body: data,
       })
-      history.push("/login")
+      .then( res => res.json() )
+      .then( submitAccepted => {
+        if (submitAccepted) {
+          // Username was accepted and account was created
+          history.push('/login')
+        } else {
+          displayFormErrorMessage('Username already in use, try something else!')
+        }
+      })
     }
     else {
       console.log('Error with inputs!')
@@ -84,7 +97,8 @@ function Signup() {
             type='text'
             name='username'
             onFocus={moveLabel}
-            onBlur={moveLabel}/>
+            onBlur={moveLabel}
+            onChange={removeFormErrorMessage}/>
 
           <label htmlFor='password' id='password'>
             Password
@@ -107,8 +121,8 @@ function Signup() {
         <button name='submit-button' id='submit-button' hidden>Sign up</button>
       </form>
 
-      <label htmlFor='submit-button' className='submit-proxy-button'>
-        Signup
+      <label id='submit-proxy' htmlFor='submit-button' className='submit-proxy-button'>
+        {submitText}
       </label>
 
     </div>

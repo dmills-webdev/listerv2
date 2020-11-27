@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap");
+nav {
+  position: absolute;
+  right: 0;
+  top: 5vmax;
+  width: fit-content;
+  min-width: 30vmin;
+  display: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background: #f8fbfb; }
+  @media only screen and (min-width: 1200px) {
+    nav {
+      top: 0;
+      width: auto;
+      min-width: fit-content;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: inherit;
+      box-shadow: none;
+      background: inherit; } }
+  nav :not(:last-child) {
+    border-bottom: 1px solid #cccccc; }
+    @media only screen and (min-width: 1200px) {
+      nav :not(:last-child) {
+        border-bottom: none; } }
+  nav .nav-user, nav .nav-button {
+    color: #333333;
+    text-decoration: none;
+    text-align: center; }
+    @media only screen and (min-width: 1200px) {
+      nav .nav-user, nav .nav-button {
+        margin-right: 10px;
+        color: #fcfcfc;
+        text-decoration: none; } }
+  nav .nav-user {
+    display: none; }
+    @media only screen and (min-width: 1200px) {
+      nav .nav-user {
+        display: block; } }
+  nav .nav-button {
+    width: 100%;
+    padding: 10px;
+    background: #f8fbfb; }
+    @media only screen and (min-width: 1200px) {
+      nav .nav-button {
+        width: auto;
+        padding: 5px;
+        border-radius: 5px;
+        background: #477a85;
+        transition: background-color 0.1s; } }
+  nav .nav-button:hover {
+    background: #7aadb8; }

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "devstart": "nodemon app",
-    "serverstart": "DEBUG=backend:* npm run devstart",
+    "serverstart": "DEBUG=backend:* npm run devstart"
   },
   "author": "",
   "license": "ISC",

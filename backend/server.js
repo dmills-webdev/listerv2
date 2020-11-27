@@ -15,7 +15,6 @@ const mongoDb = process.env.MONGODB
 mongoose.connect(mongoDb, {useUnifiedTopology: true, useNewUrlParser: true})
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'Mongo connection error!'))
-
 const User = mongoose.model(
   'User',
   new Schema({
@@ -29,18 +28,12 @@ const User = mongoose.model(
 const app = express()
 const upload = multer()
 
-// For parsing multipart/form-data
+app.use(session({secret: process.env.COOKIE_SECRET, resave: false, saveUninitialized: true}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(express.json())
+app.use(express.static('../client/build'))
 app.use(upload.array())
-app.use(express.static('public'))
-
-// Verify is user is logged in
-function loggedIn(req, res, next) {
-  if (req.user) {
-    next()
-  } else {
-    res.redirect('/login')
-  }
-}
 
 // Verify login details against database of users
 passport.use(
@@ -74,31 +67,48 @@ passport.deserializeUser(function(id, done) {
   })
 })
 
-// App middleware
-app.use('/', express.static(path.join(__dirname, './client/build')))
-app.use(session({secret: process.env.COOKIE_SECRET, resave: false, saveUninitialized: true}))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(express.json())
 
+
+// MIDDLEWARE
+
+// Verify is user is logged in
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+}
+
+// Check username is not aleady in use
+async function checkUsername(req, res, next) {
+  const username = req.body.username
+  console.log(username)
+  const user = await User.findOne({username: username})
+  if (user !== null) {
+    console.log('Username in use')
+    res.json(false)
+  } else {
+    console.log('Username NOT in use')
+    next()
+  }
+}
+
+
+
+app.get('/',
+  function (req, res) {
+    res.sendFile('../client/build/index.html')
+  })
 
 // Signup request
 app.post(
-  '/signup',
-  async function(req, res, next) {
-    // Confirm serverside again that the username requested definitely isn't alredy registered
-    let usernameCheck
-    await User.findOne({username: req.body.username})
-    .then( user => {usernameCheck = user})
-    .catch( err => console.log(err) )
-    if (usernameCheck !== null) { // Should fail, meaning to user with that username exists
-      return next()
-    }
-
+  '/signup', checkUsername,
+  async function(req, res) {
     // Generate passoword hash for database storage
     await bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
       if (err) {
-        return next(err)
+        res.sendStatus(500)
       }
       // Create and save user to database
       const user = new User({
@@ -110,72 +120,56 @@ app.post(
         if (err) {
           console.log(err)
         }
-        res.redirect('/login')
+        //res.redirect('/login')
+        res.json(true)
       })
     })
-  }
-)
+  })
 
 // Login request
 app.post(
   '/login',
-  passport.authenticate('local'),function(req, res, next) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
+  passport.authenticate('local'),function(req, res) {
     res.json(req.user)
-  }
-)
+  })
 
 // Logout request
-app.get('/logout',
-  function(req, res, next) {
+app.get(
+  '/logout',
+  function(req, res) {
     req.session.destroy()
     res.redirect('/login')
-  }
-)
-
+  })
 
 // API call to retrieve a user's todos
 app.get(
-  '/api/user-todos', loggedIn,
-  function(req, res, next) {
+  '/api/todos', loggedIn,
+  function(req, res) {
     User.findOne({username: req.user.username})
     .then(user => {
       res.send(user.todos)
     })
     .catch(err => res.status(404).json({success: false}))
-  }
-)
+  })
 
 // API call to update a user's todos
 app.put(
-  '/api/user-todos', loggedIn,
-  async function(req, res, next) {
+  '/api/todos', loggedIn,
+  async function(req, res) {
     const body = req.body.todos
     const username = req.user.username
     const doc = await User.findOne({username: username})
     doc.todos = body
     doc.save()
     res.json('All good')
-  }
-)
+  })
 
 // API call to check if a username is already taken
 app.post(
-  '/api/signup/check-if-username-is-taken',
-  async function(req, res, next) {
-    const username = req.body.username
-    console.log(username)
-    const doc = await User.findOne({username: username})
-    if (doc !== null) {
-      console.log('Username in use')
-      res.json(false)
-    } else {
-      console.log('Username NOT in use')
-      res.json(true)
-    }
-  }
-)
+  '/api/signup/check-if-username-is-taken', checkUsername,
+  function(req, res) {
+    res.json(true)
+  })
 
 
 
