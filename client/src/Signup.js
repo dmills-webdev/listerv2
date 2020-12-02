@@ -18,11 +18,16 @@ function Signup() {
     {
       return true // Form is valid
     }
-    else if (password !== passwordConfirmation) {
-      return `Passwords don't match, try retyping them!`
-    }
-    else if (password.length <= 8) {
-      return `Password too short, make sure it's at least 8 characters long!`
+    else {
+      // Push all relevant validation errors into an array
+      var errorBoxMessage =[]
+      if (password !== passwordConfirmation) {
+        errorBoxMessage.push(`Passwords don't match!`)
+      }
+      if (password.length <= 8) {
+        errorBoxMessage.push(`Minimum password length 8 characters!`)
+      }
+      return errorBoxMessage
     }
   }
 
@@ -31,10 +36,7 @@ function Signup() {
     e.preventDefault()
     e.persist() // Persist form event for clientside validation and then to be sent to server
 
-    // Call function to check form value validity
-    let isSubmissionValid
-    await validateForm(e)
-    .then(submissionValidity => {isSubmissionValid = submissionValidity})
+    const isSubmissionValid = validateForm(e)
 
     if ( isSubmissionValid === true )  {
       const form = e.target
@@ -50,26 +52,57 @@ function Signup() {
           history.push('/login')
         } else {
           // Form rejected serverside for username already being in use, display error
-          displayFormErrorMessage('Username already in use, try something else!')
+          displayFormErrorMessage()
+          displayErrorBox('Username already in use, try something else!')
         }
       })
     }
     else {
-      displayFormErrorMessage(isSubmissionValid)
+      // Form rejected clientside for password validtion issues, display error
+      displayFormErrorMessage()
+      removeErrorBox()
+      displayErrorBox(isSubmissionValid)
     }
   }
 
 
-// Display form errors
-  // Submit button error
-  function displayFormErrorMessage( message ) {
-    modifySubmitText(message)
+// Form error visualisation
+  // Modify submit button to display that there is an error in the form
+  function displayFormErrorMessage() {
+    modifySubmitText('Error in form!')
     document.getElementById('submit-proxy').classList.add('error-styling')
   }
+  // Revert submit button back to normal
   function removeFormErrorMessage() {
     modifySubmitText('Submit')
     document.getElementById('submit-proxy').classList.remove('error-styling')
   }
+  // Display error box in form
+  function displayErrorBox( validationErrors ) {
+    document.getElementById('form-container').classList.add('shrink-width')
+
+    const errorBox = document.getElementById('error-box')
+    validationErrors.map(item => {
+      let errorItem = document.createElement('div')
+      errorItem.textContent = item
+      errorBox.appendChild(errorItem)
+    })
+    errorBox.classList.add('visible')
+  }
+  // Remove error box in form
+  function removeErrorBox() {
+    document.getElementById('form-container').classList.remove('shrink-width')
+
+    const errorBox = document.getElementById('error-box')
+    errorBox.classList.remove('visible')
+    errorBox.textContent = ''
+  }
+  // Clear error messages when any of the form input values change
+  function clearErrorDisplay() {
+    removeErrorBox()
+    removeFormErrorMessage()
+  }
+
 
 // Moves and shrinks form input label when the input gains focus
   function moveLabel(e) {
@@ -92,8 +125,8 @@ function Signup() {
     </div>
 
     <div className='form-area'>
-      <form onSubmit={handleSubmit} name='signup' className='signup-form' autocomplete='off'>
-
+      <form onSubmit={handleSubmit} name='signup' className='signup-form' autoComplete='off'>
+        <div id='form-container'>
           <div className='input-container'>
             <label htmlFor='username' id='username'>
               Username
@@ -103,7 +136,7 @@ function Signup() {
               name='username'
               onFocus={moveLabel}
               onBlur={moveLabel}
-              onChange={removeFormErrorMessage}/>
+              onChange={clearErrorDisplay}/>
           </div>
 
           <div className='input-container'>
@@ -115,7 +148,7 @@ function Signup() {
               name='password'
               onFocus={moveLabel}
               onBlur={moveLabel}
-              onChange={removeFormErrorMessage}/>
+              onChange={clearErrorDisplay}/>
           </div>
 
           <div className='input-container'>
@@ -127,21 +160,18 @@ function Signup() {
               name='passwordConfirmation'
               onFocus={moveLabel}
               onBlur={moveLabel}
-              onChange={removeFormErrorMessage}/>
+              onChange={clearErrorDisplay}/>
           </div>
+          <div id='error-box'>Error</div>
 
-        <button name='submit-button' id='submit-button' hidden></button>
+          <button name='submit-button' id='submit-button' hidden></button>
+        </div>
       </form>
 
       <label id='submit-proxy' htmlFor='submit-button' className='submit-proxy-button'>
         {submitText}
       </label>
-
     </div>
-
-    <div id='error-box' hidden>Error</div>
-
-
   </div>
   )
 }
