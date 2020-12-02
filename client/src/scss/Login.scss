@@ -26,7 +26,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1 1 auto;
+    height: 50%;
     padding: 20px;
     text-align: center;
 
@@ -48,45 +48,52 @@
   }
 
   .form-area {
-    flex: 1 1 auto;
-    @media only screen and (min-width: $breakpoint-pc) {
-      margin-top: 15%;
-    }
+    height: 50%;
 
     .login-form {
       display: flex;
       flex-direction: column;
       position: relative;
       width: 90%;
+      height: 80%;
       margin: 0 auto;
-      padding: 0 20px 3em 20px;
+      padding: 10px 20px 2em 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px $box-shadow;
       background: $white;
       @media only screen and (min-width: $breakpoint-pc) {
-        top: -15%; // See below on submit-proxy-button
         width: 120%;
         right: 10%;
         border-radius: 20px;
       }
 
+
+      .input-container {
+        height: calc(100% / 2); // Divide 100% by number of containers that will be in the form
+      }
       label {
         display: block;
         position: relative;
-        bottom: -1.5em;
-        min-height: 20px;
-        margin-top: 10px;
+        bottom: -40%;
+        height: 20%;
         color: $grey1;
         pointer-events:none;
         transition: bottom 0.3s, font-size 0.3s;
       }
       .focussedLabel {
-        font-size: 0.75rem;
         bottom: 0;
+        font-size: 0.75rem;
       }
       input {
+        display: block;
+        height: 60%;
+        width: 100%;
         border-bottom: 1px dotted $grey4;
-        height: 2em;
+        padding-left: 5px;
+        margin: auto 0;
+      }
+      input:focus {
+         outline: none;
       }
     }
 
@@ -104,12 +111,25 @@
       font-size: 1.4rem;
       line-height: 2em;
       text-align: center;
-      @media only screen and (min-width: $breakpoint-pc) {
-        top: calc(0em - 1em - 15%); // Submit button intersect form at half its height
-      }
     }
     .submit-proxy-button:hover {
       background: $primary-dark
+    }
+    .error-styling:hover {
+      background: #b53434;
+    }
+    .error-styling {
+      background: #ff4e4e;
+      color: $white;
+      width: 120%;
+      max-width: 120%;
+      right: 10%;
+    }
+    #error-box {
+      position: relative;
+      top: -15%;
+      height: 2em;
+      background: hsla(0, 25%, 50%, 1);
     }
   }
 }

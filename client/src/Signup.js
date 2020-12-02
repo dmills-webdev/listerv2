@@ -10,7 +10,7 @@ function Signup() {
   const [ submitText, modifySubmitText ] = useState('Submit')
 
 // Validate signup details
-  async function validateForm(e) {
+  function validateForm(e) {
     const password = e.target.password.value
     const passwordConfirmation = e.target.passwordConfirmation.value
     if ((password === passwordConfirmation) && // Passwords match
@@ -61,11 +61,11 @@ function Signup() {
 
 
 // Display form errors
+  // Submit button error
   function displayFormErrorMessage( message ) {
     modifySubmitText(message)
     document.getElementById('submit-proxy').classList.add('error-styling')
   }
-
   function removeFormErrorMessage() {
     modifySubmitText('Submit')
     document.getElementById('submit-proxy').classList.remove('error-styling')
@@ -114,7 +114,8 @@ function Signup() {
               type='password'
               name='password'
               onFocus={moveLabel}
-              onBlur={moveLabel}/>
+              onBlur={moveLabel}
+              onChange={removeFormErrorMessage}/>
           </div>
 
           <div className='input-container'>
@@ -125,7 +126,8 @@ function Signup() {
               type='password'
               name='passwordConfirmation'
               onFocus={moveLabel}
-              onBlur={moveLabel}/>
+              onBlur={moveLabel}
+              onChange={removeFormErrorMessage}/>
           </div>
 
         <button name='submit-button' id='submit-button' hidden></button>

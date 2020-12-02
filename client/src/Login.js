@@ -43,23 +43,27 @@ function Signup({ setUser }) {
       <div className='form-area'>
         <form onSubmit={handleSubmit} name='login' className='login-form'>
 
-            <label htmlFor='username' id='username'>
-              Username
-            </label>
-            <input
-              type='text'
-              name='username'
-              onFocus={moveLabel}
-              onBlur={moveLabel}/>
+            <div className='input-container'>
+              <label htmlFor='username' id='username'>
+                Username
+              </label>
+              <input
+                type='text'
+                name='username'
+                onFocus={moveLabel}
+                onBlur={moveLabel}/>
+            </div>
 
-            <label htmlFor='password' id='password'>
-              Password
-            </label>
-            <input
-              type='password'
-              name='password'
-              onFocus={moveLabel}
-              onBlur={moveLabel}/>
+            <div className='input-container'>
+              <label htmlFor='password' id='password'>
+                Password
+              </label>
+              <input
+                type='password'
+                name='password'
+                onFocus={moveLabel}
+                onBlur={moveLabel}/>
+            </div>
 
           <button name='submit-button' id='submit-button' hidden></button>
         </form>
