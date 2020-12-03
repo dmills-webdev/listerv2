@@ -9,7 +9,7 @@ function Signup() {
 // String content of the submit button which varies if there are errors in the inputs that need to be fixed before the form can be submitted
   const [ submitText, modifySubmitText ] = useState('Submit')
 
-// Validate signup details
+// Locally validate signup details
   function validateForm(e) {
     const password = e.target.password.value
     const passwordConfirmation = e.target.passwordConfirmation.value
@@ -19,7 +19,7 @@ function Signup() {
       return true // Form is valid
     }
     else {
-      // Push all relevant validation errors into an array
+      // Push all relevant validation errors into an array and return it
       var errorBoxMessage =[]
       if (password !== passwordConfirmation) {
         errorBoxMessage.push(`Passwords don't match!`)
@@ -53,7 +53,7 @@ function Signup() {
         } else {
           // Form rejected serverside for username already being in use, display error
           displayFormErrorMessage()
-          displayErrorBox('Username already in use, try something else!')
+          displayErrorBox(['Username already in use, try something else!'])
         }
       })
     }

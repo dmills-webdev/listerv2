@@ -110,7 +110,7 @@
           display: none;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: space-evenly;
           position: absolute;
           right: 20px;
           top: 20px;
@@ -124,6 +124,7 @@
           }
         }
         #error-box.visible {
+          text-align: center;
           display: flex;
         }
       }
