@@ -128,9 +128,15 @@ app.post(
 
 // Login request
 app.post(
-  '/login',
-  passport.authenticate('local'),function(req, res) {
-    res.json(req.user)
+  '/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) { return next(err) }
+      if (!user) { return res.json(false) }
+      req.logIn(user, function(err) {
+        if (err) { return res.json(false) }
+        return res.json(req.user)
+      })
+    })(req, res, next)
   })
 
 // Logout request

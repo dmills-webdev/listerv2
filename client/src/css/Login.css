@@ -100,10 +100,7 @@
       background: #b53434; }
     .login-container .form-area .error-styling {
       background: #ff4e4e;
-      color: white;
-      width: 120%;
-      max-width: 120%;
-      right: 10%; }
+      color: white; }
     .login-container .form-area #error-box {
       position: relative;
       top: -15%;
